@@ -1,1 +1,1 @@
-# mern-ecommerce-full-code
+# mern-ecommerce

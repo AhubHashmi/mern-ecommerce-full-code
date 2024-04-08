@@ -21,25 +21,32 @@ const UpdateProduct = () => {
     //get single product
     const getSingleProduct = async () => {
         try {
-            const { data } = await axios.get(
-                `/api/v1/product/getProduct/${params.slug}`
-            );
-            setName(data.product.name);
-            setId(data.product._id);
-            setDescription(data.product.description);
-            setPrice(data.product.price);
-            setPrice(data.product.price);
-            setQuantity(data.product.quantity);
-            setShipping(data.product.shipping);
-            setCategory(data.product.category._id);
+            const response = await axios.get(`/api/v1/product/getProduct/${params.slug}`);
+            const { data } = response;
+
+            if (data?.success && data?.product) {
+                const product = data.product;
+                setName(product.name || '');
+                setId(product._id || '');
+                setDescription(product.description || '');
+                setPrice(product.price || '');
+                setQuantity(product.quantity || '');
+                setShipping(product.shipping || '');
+                setCategory(product.category?._id || '');
+            } else {
+                console.log("Product data not available or request unsuccessful");
+            }
         } catch (error) {
             console.log(error);
+            toast.error("Error fetching product data");
         }
     };
+
     useEffect(() => {
         getSingleProduct();
-        //eslint-disable-next-line
-    }, []);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [params.slug]); // Add params.slug to the dependency array to trigger the effect when slug changes
+
     //get all category
     const getAllCategory = async () => {
         try {
@@ -110,16 +117,13 @@ const UpdateProduct = () => {
                         <h1>Update Product</h1>
                         <div className="m-1 w-75">
                             <select
-                                bordered={false}
-                                placeholder="select a category"
-                                size="large"
-                                showSearch
                                 className="form-select mb-3"
-                                onChange={(value) => {
-                                    setCategory(value);
+                                onChange={(e) => {
+                                    setCategory(e.target.value);
                                 }}
                                 value={category}
                             >
+                                <option value="" disabled>Select a category</option>
                                 {categories?.map((c) => (
                                     <option key={c._id} value={c._id}>
                                         {c.name}
@@ -198,15 +202,11 @@ const UpdateProduct = () => {
                             </div>
                             <div className="mb-3">
                                 <select
-                                    bordered={false}
-                                    placeholder="select Shipping "
-                                    size="large"
-                                    showSearch
                                     className="form-select mb-3"
-                                    onChange={(value) => {
-                                        setShipping(value);
+                                    onChange={(e) => {
+                                        setShipping(e.target.value === "1");
                                     }}
-                                    value={shipping ? "yes" : "No"}
+                                    value={shipping ? "1" : "0"}
                                 >
                                     <option value="0">No</option>
                                     <option value="1">Yes</option>

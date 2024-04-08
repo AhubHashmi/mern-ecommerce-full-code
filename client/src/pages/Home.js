@@ -12,7 +12,7 @@ import toast from 'react-hot-toast';
 
 const Home = () => {
     const navigate = useNavigate();
-    const {cart, setCart} = useCart();
+    const { cart, setCart } = useCart();
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
     const [checked, setChecked] = useState([]);
@@ -114,11 +114,15 @@ const Home = () => {
         <Layout title={'All Products'}>
             {/* banner image */}
             <img
-                src="/images/banner.png"
+                src="\images\black-friday-elements-assortment_23-2149074076.jpg"
                 className="banner-img"
                 alt="bannerimage"
                 width={"100%"}
             />
+            <div className="banner-text">
+                <h1>Welcome to Our Store</h1>
+                <p>Discover amazing deals on Black Friday</p>
+            </div>
             {/* banner image */}
             <div className='container-fluid row mt-3 home-page'>
                 <div className='col-md-3 filters'>
@@ -164,11 +168,12 @@ const Home = () => {
                                     <div className='card-name-price'>
                                         <h5 className="card-title">{p.name}</h5>
                                         <h5 className="card-title card-price">
-                                            {p.price.toLocaleString("en-US", {
+                                            {p.price.toLocaleString("en-PK", {
                                                 style: "currency",
-                                                currency: "USD",
+                                                currency: "PKR",
                                             })}
                                         </h5>
+
                                     </div>
                                     <p className="card-text">
                                         {p.description.substring(0, 60)}...

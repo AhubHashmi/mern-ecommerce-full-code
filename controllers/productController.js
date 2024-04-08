@@ -85,24 +85,25 @@ export const getProductController = async (req, res) => {
 //get single product
 export const singleProductController = async (req, res) => {
     try {
-        const products = await productModel
-            .findOne({ slug: req.params.slug })
-            .select("-photo")
-            .populate('category');
-        res.status(200).send({
-            success: true,
-            message: "Single Product",
-            products,
-        });
+      const product = await productModel
+        .findOne({ slug: req.params.slug })
+        .select("-photo")
+        .populate("category");
+      res.status(200).send({
+        success: true,
+        message: "Single Product Fetched",
+        product,
+      });
     } catch (error) {
-        console.log(error)
-        res.status(500).send({
-            success: false,
-            error,
-            message: "Error in Getting Single Product!"
-        })
+      console.log(error);
+      res.status(500).send({
+        success: false,
+        message: "Eror while getitng single product",
+        error,
+      });
     }
-};
+  };
+
 
 //get product photo
 export const productPhotoController = async (req, res) => {
@@ -142,7 +143,7 @@ export const delPhotoController = async (req, res) => {
             success: false,
             error,
             message: "Error while deleting photo!"
-        })
+        });
     }
 };
 
@@ -152,44 +153,44 @@ export const updateProductController = async (req, res) => {
         const { name, slug, description, price, category, quantity, shipping } = req.fields;
         const { photo } = req.files;
 
-        //validation
-        switch (true) {
-            case !name:
-                return res.status(500).send({ error: "Name Required!" });
-            case !description:
-                return res.status(500).send({ error: "Description Required!" });
-            case !price:
-                return res.status(500).send({ error: "Price Required!" });
-            case !category:
-                return res.status(500).send({ error: "Category Required!" });
-            case !quantity:
-                return res.status(500).send({ error: "Quantity Required!" });
-            case !photo && photo.size > 1000000:
-                return res.status(500).send({ error: "Photo Required & should be less than 1MB!" });
+        // Validation
+        if (!name || !description || !price || !category || !quantity || (photo && photo.size > 1000000)) {
+            return res.status(400).json({ error: "Invalid input data" });
         }
-        const products = await productModel.findByIdAndUpdate(
-            req.params.pid,
-            { ...req.fields, slug: slugify(name) },
-            { new: true });
+
+        const updatedFields = {
+            name,
+            slug: slugify(name),
+            description,
+            price,
+            category,
+            quantity,
+            shipping,
+        };
+
+        const product = await productModel.findByIdAndUpdate(req.params.pid, updatedFields, { new: true });
+
+        if (!product) {
+            return res.status(404).json({ error: "Product not found" });
+        }
+
         if (photo) {
-            products.photo.data = fs.readFileSync(photo.path);
-            products.photo.contentType = photo.type;
+            product.photo.data = fs.readFileSync(photo.path);
+            product.photo.contentType = photo.type;
+            await product.save();
         }
-        await products.save();
-        res.status(201).send({
+
+        res.status(200).json({
             success: true,
-            message: "Product Updated Successfully!",
-            products,
+            message: "Product updated successfully",
+            product,
         });
     } catch (error) {
-        console.log(error)
-        res.status(500).send({
-            success: false,
-            error,
-            message: "Error while updating Product!"
-        });
+        console.log(error);
+        res.status(500).json({ success: false, error: "Error updating product" });
     }
 };
+
 
 // filters
 export const productFiltersController = async (req, res) => {

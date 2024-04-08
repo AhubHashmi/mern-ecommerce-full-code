@@ -66,7 +66,7 @@ const Product = () => {
                         <AdminMenu />
                     </div>
                     <div className='col-md-9'>
-                        <h1>All Product</h1>
+                        <h1>All Products</h1>
                         <div className='m-1 w-75'>
                             <MySelect
                                 options={categories.map(c => ({ value: c._id, label: c.name }))}
