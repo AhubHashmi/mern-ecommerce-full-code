@@ -4,6 +4,7 @@ import {
     getAllOrdersController,
     orderStatusController,
     updateProfileController,
+    getUserQueriesController,
 } from "../controllers/authController.js";
 import { isAdmin, reqSignin } from "../middlewares/authMiddleware.js";
 
@@ -48,5 +49,8 @@ router.put(
 
 //update profile
 router.put("/profile", reqSignin, updateProfileController);
+
+// New route for fetching user queries
+router.get("/user-queries", reqSignin, getUserQueriesController);
 
 export default router;

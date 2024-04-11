@@ -9,6 +9,8 @@ import { useCart } from '../context/cart';
 import { AiOutlineReload } from "react-icons/ai";
 import "../styles/Home.css";
 import toast from 'react-hot-toast';
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 const Home = () => {
     const navigate = useNavigate();
@@ -112,21 +114,35 @@ const Home = () => {
 
     return (
         <Layout title={'All Products'}>
-            {/* banner image */}
-            <img
-                src="\images\black-friday-elements-assortment_23-2149074076.jpg"
-                className="banner-img"
-                alt="bannerimage"
-                width={"100%"}
-            />
-            <div className="banner-text">
-                <h1>Welcome to Our Store</h1>
-                <p>Discover amazing deals on Black Friday</p>
-            </div>
-            {/* banner image */}
+            {/* Automatic image slideshow */}
+            <Carousel showArrows={false} showThumbs={false} autoPlay infiniteLoop>
+                <div>
+                    <img src="\images\black-friday-elements-assortment_23-2149074076.jpg" alt="Slide 1" />
+                    <div className="banner-text">
+                        <h1>Welcome to Our Store</h1>
+                        <p>Discover amazing deals on Black Friday</p>
+                    </div>
+                </div>
+                <div>
+                    <img src="\images\top-view-online-shopping-concept-with-credit-card-smart-phone-computer-isolated-office-yellow-table-background_315337-5991.jpg" alt="Slide 2" />
+                    <div className="banner-text">
+                        <h1>Get Ready for Summer</h1>
+                        <p>Find everything you need for a fabulous summer season.</p>
+                    </div>
+                    {/* Add banner text for each slide */}
+                </div>
+                <div>
+                    <img src="\images\ecommerce-2140603_640.jpg" alt="Slide 1" />
+                    <div className="banner-text">
+                        <h1>Shop the Latest Trends</h1>
+                        <p>Explore our collection of stylish and trendy products.</p>
+                    </div>
+                </div>
+                {/* Add more slides as needed */}
+            </Carousel>
             <div className='container-fluid row mt-3 home-page'>
                 <div className='col-md-3 filters'>
-                    <h4 className='text-center'>Flter By Category</h4>
+                    <h4 className='text-center'>Filter By Category</h4>
                     <div className='d-flex flex-column'>
                         {categories?.map((c) => (
                             <MyCheckbox
@@ -138,7 +154,7 @@ const Home = () => {
                         ))}
 
                     </div>
-                    <h4 className='text-center mt-4'>Flter By Price</h4>
+                    <h4 className='text-center mt-4'>Filter By Price</h4>
                     <div className='d-flex flex-column'>
                         <MyRadioGroup
                             options={Prices.map(p => ({ value: p.array, label: p.name }))}
@@ -155,7 +171,7 @@ const Home = () => {
                     </div>
                 </div>
                 <div className='col-md-9'>
-                    <h1 className='text-center'>All Products</h1>
+                    <h1 className='text-center pt-5'>Trending Products</h1>
                     <div className='d-flex flex-wrap'>
                         {products?.map((p) => (
                             <div className="card m-2" style={{ width: "18rem" }}>

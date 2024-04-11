@@ -6,6 +6,7 @@ import authRoutes from './routes/authRoute.js';
 import cors from 'cors';
 import categoryRoute from './routes/categoryRoute.js';
 import productRoute from './routes/productRoute.js';
+import contactRoute from './routes/contactRoute.js';
 import path from 'path';
 
 dotenv.config();
@@ -26,6 +27,7 @@ app.use(morgan('dev'));
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/category', categoryRoute);
 app.use('/api/v1/product', productRoute);
+app.use('/api/v1/contact', contactRoute);
 
 //rest api
 // app.use('*', function (req, res) {

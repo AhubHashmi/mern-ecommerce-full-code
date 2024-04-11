@@ -2,6 +2,7 @@ import JWT from "jsonwebtoken";
 import { comparePswrd, hashPswrd } from "../helpers/authHelper.js";
 import userModel from "../models/userModel.js";
 import orderModel from "../models/orderModel.js";
+import Contact from '../models/contactModel.js'; // Import your Contact model
 
 export const regController = async (req, res) => {
     try {
@@ -239,5 +240,17 @@ export const updateProfileController = async (req, res) => {
             message: "Error WHile Update profile",
             error,
         });
+    }
+};
+
+export const getUserQueriesController = async (req, res) => {
+    const userId = req.user._id; // Assuming the authenticated user's ID is available in req.user
+
+    try {
+        const queries = await Contact.find({ user: userId }).select('message status'); // Fetch only the message and status fields
+        res.status(200).json(queries);
+    } catch (error) {
+        console.error("Error fetching user queries:", error);
+        res.status(500).json({ error: "Error fetching user queries." });
     }
 };

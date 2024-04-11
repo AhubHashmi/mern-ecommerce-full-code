@@ -35,8 +35,8 @@ const Category = () => {
     const allCategories = async () => {
         try {
             const { data } = await axios.get("/api/v1/category/getCategory");
-            if (data.success) {
-                setCategories(data.category);
+            if (data?.success) {
+                setCategories(data?.category);
             }
         } catch (error) {
             console.log(error);
@@ -49,12 +49,13 @@ const Category = () => {
     }, []);
 
     //update category
-    const handleUpdate = async (e) => {
+    const handleUpdate = async (categoryId, e) => {
         e.preventDefault();
         try {
-            const { data } = await axios.put(`/api/v1/category/updateCategory/${select._id}`,
+            const { data } = await axios.put(`/api/v1/category/updateCategory/${categoryId}`,
                 { name: updatedName });
-            if (data.success) {
+            console.log('Update Response:', data); // Log the response from the backend
+            if (data?.success) {
                 toast.success(`${updatedName} is updated!`);
                 setSelect(null);
                 setUpdatedName("");
@@ -64,6 +65,7 @@ const Category = () => {
                 toast.error(data.message);
             }
         } catch (error) {
+            console.log('Update Error:', error); // Log any errors
             toast.error("Something went wrong!");
         }
     };
@@ -106,20 +108,50 @@ const Category = () => {
                             </thead>
                             <tbody>
                                 {categories?.map((c) => (
-                                    <>
-                                        <tr>
-                                            <td key={c._id}>{c.name}</td>
-                                            <td><button className='btn btn-primary ms-2' onClick={() => {
-                                                setVisible(true);
-                                                setUpdatedName(c.name);
-                                                setSelect(c);
-                                            }}>Edit</button>
-                                                <button className='btn btn-danger ms-2' onClick={() => { handleDelete(c._id) }}>Delete</button>
-                                            </td>
-                                        </tr>
-                                    </>
+                                    <tr key={c._id}>
+                                        {/* <td>{c._id}</td> */}
+                                        <td>
+                                            {c._id === select?._id ? (
+                                                <input
+                                                    type="text"
+                                                    value={updatedName}
+                                                    onChange={(e) => setUpdatedName(e.target.value)}
+                                                />
+                                            ) : (
+                                                c.name
+                                            )}
+                                        </td>
+                                        <td>
+                                            {c._id === select?._id ? (
+                                                <button
+                                                    className="btn btn-primary ms-2"
+                                                    onClick={(e) => handleUpdate(c._id, e)}
+                                                >
+                                                    Save
+                                                </button>
+                                            ) : (
+                                                <button
+                                                    className="btn btn-primary ms-2"
+                                                    onClick={() => {
+                                                        setVisible(true);
+                                                        setUpdatedName(c.name);
+                                                        setSelect(c);
+                                                    }}
+                                                >
+                                                    Edit
+                                                </button>
+                                            )}
+                                            <button
+                                                className="btn btn-danger ms-2"
+                                                onClick={() => handleDelete(c._id)}
+                                            >
+                                                Delete
+                                            </button>
+                                        </td>
+                                    </tr>
                                 ))}
                             </tbody>
+
                         </table>
                         </div>
                         <div>
