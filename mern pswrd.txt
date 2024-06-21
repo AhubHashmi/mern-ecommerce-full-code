@@ -1,0 +1,12 @@
+mern pswrd: asdf123/ 987654, user1 AhubHashmi
+mern pswrd: asd123 (admin1@gmail.com)
+braintree: hashmi, Propaganda123
+paypal: ahubhashmi40@gmail.com, Propaganda123
+
+https://clean-teal-bikini.cyclic.app/
+
+//mern-boiler-plate
+admin: (admin2) admin2@gmail.com, zxcv123
+user: (user2) user2@gmail.com, asdf123
+
+https://github.com/kimlimjustin/Classroom?tab=readme-ov-file
