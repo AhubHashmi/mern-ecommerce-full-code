@@ -2,9 +2,10 @@
     background-color: red;
     color: white;
     border-radius: 50%;
-    padding: 5px 8px;
-    font-size: 12px;
+    padding: 0.5rem 0.8rem; /* Using relative units */
+    font-size: 1rem; /* Using relative units */
     position: relative;
-    top: -10px;
-    left: 10px;
-}
+    top: -0.625rem; /* Using relative units */
+    left: 0.625rem; /* Using relative units */
+  }
+  

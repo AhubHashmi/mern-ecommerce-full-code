@@ -11,12 +11,15 @@ const About = () => {
                 <div className='col-md-4'>
                     <h1 className='bg-dark p-2 text-white text-center'>About Us</h1>
                     <p className='text-justify mt-2'>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus
-                        officiis obcaecati esse tempore unde ratione, eveniet mollitia,
-                        perferendis eius temporibus dicta blanditiis doloremque explicabo
-                        quasi sunt vero optio cum aperiam vel consectetur! Laborum enim
-                        accusantium atque, excepturi sapiente amet! Tenetur ducimus aut
-                        commodi illum quidem neque tempora nam.
+                        <i>Welcome to <b>SHOP ON</b>!
+
+                        At <b>SHOP ON</b>, we're passionate about bringing you the best products and shopping experience. Founded in 2024, we've dedicated ourselves to curating a wide range of high-quality products that cater to your every need.
+
+                        Our mission is simple: to make online shopping enjoyable, convenient, and reliable for our valued customers. Whether you're looking for the latest fashion trends, tech gadgets, home essentials, or unique gifts, we've got you covered.
+
+                        What sets us apart is our commitment to excellence in customer service. Our team is here to assist you every step of the way, from browsing our extensive collection to ensuring your orders are delivered promptly and securely.
+
+                        Thank you for choosing <b>SHOP ON</b>. We look forward to serving you and making your shopping experience exceptional!</i>
                     </p>
                 </div>
             </div>

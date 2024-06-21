@@ -64,7 +64,7 @@ const Contact = () => {
                                 required
                             />
                             <label htmlFor="query" className="form-label">Your Query:</label>
-                            <textarea
+                            <input
                                 id="query"
                                 className="form-control"
                                 value={queryData}

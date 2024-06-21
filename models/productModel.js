@@ -14,9 +14,16 @@ const productSchema = new mongoose.Schema({
         required: true,
     },
     price: {
-        type: Number,
-        required: true,
+        min: {
+            type: Number,
+            required: true,
+        },
+        max: {
+            type: Number,
+            required: true,
+        },
     },
+
     category: {
         type: mongoose.ObjectId,
         ref: "Category",

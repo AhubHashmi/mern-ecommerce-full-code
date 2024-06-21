@@ -37,7 +37,7 @@ const AdminDashboard = () => {
 
     const getStatusMessage = (status) => {
         return status === 'resolved' ? 'Resolved' : 'Pending';
-    };
+    };  
 
     return (
         <Layout>
@@ -70,7 +70,7 @@ const AdminDashboard = () => {
                                             <td>{query.name}</td>
                                             <td>{query.email}</td>
                                             <td>{query.message}</td>
-                                            <td>{query.status}</td>
+                                            {/* <td>{query.status}</td> */}
                                             <td>{getStatusMessage(query.status)}</td>
                                             <td>
                                                 {query.status !== 'resolved' && (

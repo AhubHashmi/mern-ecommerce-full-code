@@ -1,5 +1,5 @@
 .product-details {
-  margin-top: 100px !important;
+  margin-top: 6.25rem !important; /* Using relative units */
 }
 
 .product-details-info {
@@ -9,7 +9,7 @@
 }
 
 .product-details-info h6 {
-  margin-bottom: 20px !important;
+  margin-bottom: 1.25rem !important; /* Using relative units */
 }
 
 .similar-products .card {
@@ -27,12 +27,13 @@
   color: green;
   font-weight: bold;
 }
+
 .similar-products button {
   border-radius: 0;
   width: 100%;
-  border-top-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  font-size: 14px;
+  border-top-left-radius: 0.3125rem; /* Using relative units */
+  border-bottom-right-radius: 0.3125rem; /* Using relative units */
+  font-size: 1rem; /* Using relative units */
   font-weight: bold;
 }
 
@@ -45,5 +46,5 @@
 }
 
 .similar-products .card-img-top {
-  height: 300px !important;
+  height: 18.75rem !important; /* Using relative units */
 }
